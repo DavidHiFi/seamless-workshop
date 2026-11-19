@@ -14,6 +14,8 @@ Turn mods on or off, change their settings, or load the whole DavidHiFi setup wi
 
 <br><br>
 
+<img src="https://img.shields.io/github/v/release/DavidHiFi/seamless-workshop?style=flat-square&label=version&color=2EA043&labelColor=161B22" alt="Latest version">
+<img src="https://img.shields.io/github/downloads/DavidHiFi/seamless-workshop/total?style=flat-square&label=downloads&color=1F6FEB&labelColor=161B22" alt="Downloads">
 <img src="https://img.shields.io/github/license/DavidHiFi/seamless-workshop?style=flat-square&label=license&color=8957E5&labelColor=161B22" alt="License">
 <img src="https://img.shields.io/badge/platform-Windows%2011-DB6D28?style=flat-square&labelColor=161B22" alt="Platform: Windows 11">
 
