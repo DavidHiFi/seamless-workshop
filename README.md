@@ -33,7 +33,7 @@ irm https://raw.githubusercontent.com/DavidHiFi/seamless-workshop/main/Install-S
 1. If Windhawk is missing or older than the 2.0 alpha, the script gets the latest alpha first with [windhawk-alpha-updater](https://github.com/DavidHiFi/windhawk-alpha-updater). Your mods and settings stay.
 2. It downloads Seamless Workshop from the latest release and throws it away if it does not match its checksum.
 3. It installs it through Windhawk's own command-line tool. Windows asks for admin rights.
-4. Click the Seamless Workshop icon in the tray. To get everything, open **Updates** and choose **Apply DavidHiFi's whole setup**.
+4. Click the Seamless Workshop icon in the tray. The welcome on first open offers **Apply DavidHiFi's whole setup**, or a list of his mods to pick from.
 
 Running the command again is safe. If you already have the newest version, it says so and changes nothing.
 
@@ -52,14 +52,16 @@ Running the command again is safe. If you already have the newest version, it sa
 
 ### Install and remove
 
-- **Every DavidHiFi mod in one list:** the Updates page lists each one you do not have yet, with what it does. One click installs it.
+- **Every DavidHiFi mod in one list:** his mods come first in Marketplace, with what each one does. One click installs it.
 - **The Windhawk library too:** Marketplace finds and installs any mod from Windhawk's own catalog.
 - **Remove:** open a mod and choose Remove. Its settings go with it.
+- **A clean way out:** "Remove all of DavidHiFi's mods" takes his mods off in one go and saves their settings as a preset first.
 - **On or off:** flip a mod's switch without opening the Windhawk editor.
 
 ### Stay up to date
 
 - **Daily check:** once a day the Workshop looks for new versions of the mods and of itself, and tells you in the tray.
+- **See what changed first:** each update says what is new in it before you install it.
 - **One click:** update one mod, or all of them at once with one backup and one admin prompt.
 - **Checked downloads:** every file is checked against a checksum before it installs.
 - **The Workshop updates itself** from the same page.
