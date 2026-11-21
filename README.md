@@ -1,89 +1,95 @@
 <div align="center">
 
-<img src="https://socialify.git.ci/DavidHiFi/seamless-workshop/image?description=1&font=Inter&language=1&name=1&owner=1&pattern=Plus&theme=Dark" alt="Seamless Workshop: one place for every DavidHiFi Windhawk mod" width="100%">
+<img src="media/social-preview.png" alt="The Seamless Workshop window on its Mods page: search, show and sort controls above DavidHiFi's mods, each with an on and off switch" width="100%">
 
 # Seamless Workshop
 
-**A Windhawk mod that installs, updates and sets up every DavidHiFi Windhawk mod from one window.**
+**A Windhawk mod that installs, updates and removes every DavidHiFi Windhawk mod from one window.**
 
-Turn mods on or off, change their settings, or load the whole DavidHiFi setup with one button.
+One command sets it up. From then on it keeps itself, the mods and their presets up to date.
 
-<a href="https://github.com/DavidHiFi/seamless-workshop/releases/latest/download/seamless-workshop.wh.cpp">
+<a href="https://github.com/DavidHiFi/seamless-workshop/releases/latest">
 <img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20DOWNLOAD%20LATEST%20RELEASE-2EA043?style=for-the-badge&labelColor=161B22" alt="Download the latest release" height="42">
 </a>
 
 <br><br>
 
-<img src="https://img.shields.io/github/v/release/DavidHiFi/seamless-workshop?style=flat-square&label=version&color=2EA043&labelColor=161B22" alt="Latest version">
-<img src="https://img.shields.io/github/downloads/DavidHiFi/seamless-workshop/total?style=flat-square&label=downloads&color=1F6FEB&labelColor=161B22" alt="Downloads">
-<img src="https://img.shields.io/github/license/DavidHiFi/seamless-workshop?style=flat-square&label=license&color=8957E5&labelColor=161B22" alt="License">
+<img src="https://img.shields.io/github/v/release/DavidHiFi/seamless-workshop?style=flat-square&label=version&color=8957E5&labelColor=161B22" alt="Latest version">
+<img src="https://img.shields.io/github/downloads/DavidHiFi/seamless-workshop/total?style=flat-square&label=downloads&color=1F6FEB&labelColor=161B22" alt="Total downloads">
 <img src="https://img.shields.io/badge/platform-Windows%2011-DB6D28?style=flat-square&labelColor=161B22" alt="Platform: Windows 11">
 
 </div>
 
 ---
 
-> [!IMPORTANT]
-> **You need the latest Windhawk alpha.** Seamless Workshop uses the Windhawk 2.0 alpha and its command-line tool. If you are on Windhawk 1.x, update first with [windhawk-alpha-updater](https://github.com/DavidHiFi/windhawk-alpha-updater). Paste this into PowerShell:
->
-> ```powershell
-> iwr 'https://raw.githubusercontent.com/DavidHiFi/windhawk-alpha-updater/main/Update-Windhawk.ps1' -OutFile "$env:TEMP\Update-Windhawk.ps1"; powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\Update-Windhawk.ps1"
-> ```
-
 ## Installation
-
-### In Windhawk
-
-1. Download `seamless-workshop.wh.cpp` with the button above and open it in Notepad.
-2. In Windhawk, click **Create a new mod**.
-3. Select all the sample code, delete it and paste in the file you downloaded.
-4. Click **Compile and enable** (or **Enable mod**), then **Exit editing mode**.
-
-### With PowerShell
 
 Paste this into PowerShell:
 
 ```powershell
-iwr 'https://raw.githubusercontent.com/DavidHiFi/seamless-workshop/main/Install-SeamlessWorkshop.ps1' -OutFile "$env:TEMP\Install-SeamlessWorkshop.ps1"; powershell -NoProfile -ExecutionPolicy Bypass -File "$env:TEMP\Install-SeamlessWorkshop.ps1"
+irm https://raw.githubusercontent.com/DavidHiFi/seamless-workshop/main/Install-SeamlessWorkshop.ps1 | iex
 ```
 
-The script finds Windhawk, downloads the mod from the latest release and checks it against its published checksum. Then it installs it with Windhawk's own command-line tool. Windows asks once for admin rights. If Windhawk is missing or too old, the script stops and tells you what to update.
+1. If Windhawk is missing or older than the 2.0 alpha, the script gets the latest alpha first with [windhawk-alpha-updater](https://github.com/DavidHiFi/windhawk-alpha-updater). Your mods and settings stay.
+2. It downloads Seamless Workshop from the latest release and throws it away if it does not match its checksum.
+3. It installs it through Windhawk's own command-line tool. Windows asks for admin rights.
+4. Click the Seamless Workshop icon in the tray. To get everything, open **Updates** and choose **Apply DavidHiFi's whole setup**.
+
+Running the command again is safe. If you already have the newest version, it says so and changes nothing.
+
+<details>
+<summary><b>Install by hand instead</b></summary>
+
+<br>
+
+1. Download `seamless-workshop.wh.cpp` from the [latest release](https://github.com/DavidHiFi/seamless-workshop/releases/latest) and open it in Notepad.
+2. In Windhawk, click **Create a new mod**, delete the sample code and paste the file in.
+3. Click **Compile and enable**, then **Exit editing mode**.
+
+</details>
 
 ## Features
 
-### Your mods
+### Install and remove
 
-- **One place for all of them:** every DavidHiFi Windhawk mod in one list, with what each one does.
-- **Updates from GitHub:** new versions come straight from [davids-windhawk-mods](https://github.com/DavidHiFi/davids-windhawk-mods), checked against a checksum before they install.
-- **On or off:** turn any mod on or off without opening the Windhawk editor.
-- **Settings:** change a mod's settings from the Workshop.
+- **Every DavidHiFi mod in one list:** the Updates page lists each one you do not have yet, with what it does. One click installs it.
+- **The Windhawk library too:** Marketplace finds and installs any mod from Windhawk's own catalog.
+- **Remove:** open a mod and choose Remove. Its settings go with it.
+- **On or off:** flip a mod's switch without opening the Windhawk editor.
+
+### Stay up to date
+
+- **Daily check:** once a day the Workshop looks for new versions of the mods and of itself, and tells you in the tray.
+- **One click:** update one mod, or all of them at once with one backup and one admin prompt.
+- **Checked downloads:** every file is checked against a checksum before it installs.
+- **The Workshop updates itself** from the same page.
 
 ### Presets
 
-- **DavidHiFi preset for each mod:** load the settings DavidHiFi uses for that mod.
-- **Whole setup in one go:** one button installs and sets up every mod the way DavidHiFi runs them.
-
-### Privacy
-
-- **Nothing private is shared:** the published presets have API keys, tokens, passwords, locations and personal folder paths taken out before they go online.
-- **Read only:** the Workshop downloads the mod list and presets. It never uploads your settings.
+- **DavidHiFi's settings for one mod**, or **his whole setup in one go**.
+- **Your settings are saved first** as a preset, so you can always go back.
+- **Your own presets:** save a set of mods and their settings, then restore them together.
 
 ## Notes
 
+> [!IMPORTANT]
+> **Needs the Windhawk 2.0 alpha.** The install command handles this for you. On Windhawk 1.x by hand? Update with [windhawk-alpha-updater](https://github.com/DavidHiFi/windhawk-alpha-updater) first.
+
 > [!NOTE]
-> **How the list stays current.** Each time a DavidHiFi mod is published, `feed.json` in this repo is rebuilt. It points at an exact commit of davids-windhawk-mods, with a SHA-256 checksum for every file.
+> **Nothing private is shared.** Published presets never hold API keys, tokens, passwords, locations or personal folder paths. The Workshop only downloads. It never uploads your settings.
 
 > [!WARNING]
-> **Loading a preset replaces that mod's settings.** Note down any values you want to keep first.
+> **Loading a preset replaces that mod's settings.** The Workshop saves your current ones as a preset first.
 
 <details>
 <summary><b>What is in this repo</b></summary>
 
 <br>
 
-- `feed.json`: the mod list the Workshop reads. Generated by the publisher, not edited by hand.
-- `Install-SeamlessWorkshop.ps1`: the PowerShell installer above.
-- The mod itself ships as `seamless-workshop.wh.cpp` on the [releases page](https://github.com/DavidHiFi/seamless-workshop/releases).
+- `feed.json`: the list the Workshop reads. It is rebuilt each time a DavidHiFi mod is published, and points at an exact commit of [davids-windhawk-mods](https://github.com/DavidHiFi/davids-windhawk-mods) with a SHA-256 checksum for every file.
+- `Install-SeamlessWorkshop.ps1`: the install command above. Run it as a file with `-Check` to see what it would do without changing anything.
+- `CHANGELOG.md`: what changed in each release.
+- The mod itself ships as `seamless-workshop.wh.cpp` on the [releases page](https://github.com/DavidHiFi/seamless-workshop/releases). A new release goes out by itself whenever its version goes up.
 
 </details>
 
