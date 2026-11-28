@@ -2,7 +2,7 @@
 // @id startup-control
 // @name Startup Control
 // @description Manage startup apps, scheduled tasks and Windows startup locations.
-// @version 0.1.14
+// @version 0.1.15
 // @author DavidHiFi
 // @github https://github.com/DavidHiFi
 // @homepage https://github.com/DavidHiFi/davids-windhawk-mods
@@ -29,6 +29,11 @@ See and switch off everything that starts with Windows, in one calm window.
   end, edit the task file, make a new task, delete one.
 - Things Windows protects show as view-only, so nothing important gets broken.
 - Each scan type and safety prompt can be switched off in the settings.
+
+## What's new in 0.1.15
+
+- Stays in the tray when Windows starts. The window opens only when you
+  open it.
 
 ## What's new in 0.1.9
 
@@ -6721,6 +6726,10 @@ HWND g_toolWindow = nullptr;
 DWORD g_toolThread = 0;
 HICON g_trayIcon = nullptr;
 bool g_trayShown = false;
+// At sign-in this process starts before the taskbar, so the first tray add fails. Retry instead
+// of opening the window; open it only if the tray never appears.
+constexpr UINT_PTR kTrayRetryTimer = 1;
+int g_trayRetries = 0;
 // The shared tray badge, copied from Seamless Crosshair.
 static HICON MakeTrayIcon_Big(bool off) {
     int size = GetSystemMetricsForDpi(SM_CXICON, GetDpiForSystem()) * 4;
@@ -6841,6 +6850,15 @@ LRESULT CALLBACK ToolWindowProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         if (HWND window = scui::g_settingsWnd.load()) PostMessageW(window, scui::WM_APP_SETTINGS_RELOAD, 0, 0);
         return 0;
     }
+    if (msg == WM_TIMER && wp == kTrayRetryTimer) {
+        UpdateTray();
+        bool wanted = Wh_GetIntSetting(L"settingsTrayIcon") != 0;
+        if (g_trayShown || !wanted || ++g_trayRetries >= 60) {
+            KillTimer(hwnd, kTrayRetryTimer);
+            if (!g_trayShown) scui::OpenSettingsWindow();
+        }
+        return 0;
+    }
     static UINT taskbarCreated = RegisterWindowMessageW(L"TaskbarCreated");
     if (msg == taskbarCreated) { g_trayShown = false; UpdateTray(); return 0; }
     return DefWindowProcW(hwnd, msg, wp, lp);
@@ -6858,8 +6876,12 @@ BOOL WhTool_ModInit() {
     if (!g_toolWindow) return FALSE;
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     g_trayIcon = MakeTrayIcon(false);
+    // Explorer runs at normal rights; let its "taskbar is back" message reach this elevated window.
+    ChangeWindowMessageFilterEx(g_toolWindow, RegisterWindowMessageW(L"TaskbarCreated"), MSGFLT_ALLOW, nullptr);
     UpdateTray();
-    if (OpenRequestChanged() || !g_trayShown) scui::OpenSettingsWindow();
+    bool trayWanted = Wh_GetIntSetting(L"settingsTrayIcon") != 0;
+    if (trayWanted && !g_trayShown) SetTimer(g_toolWindow, kTrayRetryTimer, 2000, nullptr);
+    if (OpenRequestChanged() || !trayWanted) scui::OpenSettingsWindow();
     return TRUE;
 }
 void WhTool_ModEntryPoint() {

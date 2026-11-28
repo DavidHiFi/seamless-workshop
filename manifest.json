@@ -1,7 +1,7 @@
 {
   "name": "seamless-workshop",
   "description": "A full Windhawk setup: every mod source and every setting.",
-  "generatedAt": "2026-11-28T10:18:00+08:00",
+  "generatedAt": "2026-11-28T22:00:01+08:00",
   "windhawkVersion": "2.0.0-alpha.8",
   "counts": {
     "mods": 125,
@@ -1212,7 +1212,7 @@
       "name": "Startup Control",
       "author": "DavidHiFi",
       "github": "https://github.com/DavidHiFi",
-      "version": "0.1.14",
+      "version": "0.1.15",
       "license": "",
       "origin": "local",
       "upstream": "",
